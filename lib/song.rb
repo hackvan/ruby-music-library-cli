@@ -1,4 +1,6 @@
 class Song
+  extend Concerns::Findable
+
   attr_reader   :artist, :genre
   attr_accessor :name
   @@all = []
@@ -14,7 +16,7 @@ class Song
       s.save
     end
   end
-
+  
   def self.all
     @@all
   end
@@ -36,4 +38,5 @@ class Song
     @genre = genre
     @genre.songs << self unless @genre.songs.include?(self)
   end
+
 end
