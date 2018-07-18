@@ -1,5 +1,6 @@
 class Song
   extend Concerns::Findable
+  extend Concerns::Sortable::ClassMethods
 
   attr_reader   :artist, :genre
   attr_accessor :name
@@ -12,9 +13,7 @@ class Song
   end
 
   def self.create(name)
-    Song.new(name).tap do |s|
-      s.save
-    end
+    new(name).tap { |s| s.save }
   end
   
   def self.new_from_filename(file_name)

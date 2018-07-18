@@ -1,5 +1,7 @@
 class Artist
-  extend Concerns::Findable
+  extend  Concerns::Findable
+  extend  Concerns::Sortable::ClassMethods
+  include Concerns::Sortable::InstanceMethods
   
   attr_accessor :name, :songs
   @@all = []
@@ -10,9 +12,7 @@ class Artist
   end
 
   def self.create(name)
-    Artist.new(name).tap do |a|
-      a.save
-    end
+    new(name).tap { |a| a.save }
   end
 
   def self.all
@@ -35,4 +35,5 @@ class Artist
   def genres
     @songs.map(&:genre).uniq
   end
+
 end

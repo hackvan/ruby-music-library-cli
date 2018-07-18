@@ -1,5 +1,7 @@
 class Genre
   extend Concerns::Findable
+  extend Concerns::Sortable::ClassMethods
+  include Concerns::Sortable::InstanceMethods
   
   attr_accessor :name, :songs
   @@all = []
@@ -10,9 +12,7 @@ class Genre
   end
 
   def self.create(name)
-    Genre.new(name).tap do |g|
-      g.save
-    end
+    new(name).tap { |g| g.save }
   end
 
   def self.all
